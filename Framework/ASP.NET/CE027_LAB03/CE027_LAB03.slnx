@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Calculator_LINQ/Calculator_LINQ.csproj" />
+  <Project Path="Sample_LINQ/Sample_LINQ.csproj" />
+  <Project Path="Student_LINQ/Student_LINQ.csproj" />
+</Solution>
