@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Guessing_Game": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
