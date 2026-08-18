@@ -1,0 +1,37 @@
+﻿@page
+@model User_Result.Pages.userModel
+@{
+}
+
+<h2>User Details</h2>
+
+<form method="post">
+
+    <div>
+        <label>Name</label><br/>
+        <input asp-for="Name"/>
+    </div>
+    <br/>
+
+    <div>
+        <label>Email ID</label><br/>
+        <input asp-for="Email"/>
+    </div>
+    <br/>
+
+    <div>
+        <label>Contact Number</label><br/>
+        <input asp-for="ContactNo"/>
+    </div>
+    <br/>
+
+    <div>
+        <label>Gender</label><br/>
+        <input type="radio" asp-for="Gender" value="Male"/> Male
+        <input type="radio" asp-for="Gender" value="Female"/> Female
+    </div>
+    <br/>
+
+    <input type="submit" value="Submit"/>
+
+</form>
