@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "word_count": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

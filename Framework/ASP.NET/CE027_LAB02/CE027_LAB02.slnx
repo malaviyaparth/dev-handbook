@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="browing_history/browing_history.csproj" />
+  <Project Path="collections/collections.csproj" />
+  <Project Path="student_application/student_application.csproj" />
+  <Project Path="word_count/word_count.csproj" />
+</Solution>

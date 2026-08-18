@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "browing_history": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
