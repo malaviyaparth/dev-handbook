@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Book_Management.Models.Book>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Book List";
+}
+
+<h2>Book List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Add Book
+</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>PublishedYear</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.BookId</td>
+                <td>@student.Title</td>
+                <td>@student.Author</td>
+                <td>@student.Category</td>
+                <td>@student.Price</td>
+                <td>@student.PublishedYear</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@student.BookId"
+                       class="btn btn-warning">
+                        Edit
+                    </a>
+
+                    <a asp-action="Details" 
+                        asp-route-id="@student.BookId" 
+                        class="btn btn-info">
+                        Details
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@student.BookId"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
