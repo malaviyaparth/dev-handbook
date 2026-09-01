@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>84d3f53c-8a4f-4570-8a1d-e504f70aaa1e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <!-- Disable app host during dev builds to avoid MSB3021 "access denied" when the apphost
+         (exe) is locked by a running process. This produces a framework-dependent DLL for dev. -->
+    <UseAppHost>false</UseAppHost>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+  </ItemGroup>
+
+  <!-- Prevent .cshtml.css files (editor-generated companion files) from being copied to output
+       which can cause MSBuild copy errors (MSB3021) when the file is locked by the editor. -->
+  <ItemGroup>
+    <Content Update="**\*.cshtml.css">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,99 @@
+@model List<Book_Store.Models.Category>
+
+@{
+    ViewData["Title"] = "Book Categories";
+}
+
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1 class="fw-bold mb-2">📚 Book Categories</h1>
+            <p class="text-muted lead">Browse books by category. Click on any category to see all books in that collection.</p>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="row g-4">
+            @foreach (var category in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <a asp-controller="Category" asp-action="Details" asp-route-id="@category.Id" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm category-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary fw-bold">@category.Name</h5>
+                                <p class="card-text text-muted">
+                                    @if (!string.IsNullOrEmpty(category.Description))
+                                    {
+                                        @category.Description
+                                    }
+                                    else
+                                    {
+                                        <text>Explore this category</text>
+                                    }
+                                </p>
+                            </div>
+                            <div class="card-footer bg-light border-0">
+                                <span class="text-primary fw-bold">
+                                    Browse <i class="bi bi-arrow-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4" role="alert">
+            <i class="bi bi-info-circle"></i> No categories available at the moment.
+        </div>
+    }
+</div>
+
+<style>
+    h1 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+    }
+
+    .category-card {
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .category-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-footer {
+        background-color: #f8f9fa !important;
+        padding: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .card-footer span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    a:hover .card-footer {
+        background-color: #e9ecef !important;
+    }
+
+    .lead {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+</style>

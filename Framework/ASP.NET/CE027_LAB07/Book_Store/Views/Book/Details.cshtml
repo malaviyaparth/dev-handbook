@@ -1,0 +1,175 @@
+@model Book_Store.Models.Book
+
+@{
+    ViewData["Title"] = $"Book Details - {Model.Name}";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden;">
+                <div class="card-header bg-primary text-white" style="padding: 2rem;">
+                    <h2 class="mb-0">@Model.Name</h2>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Author and Category -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p class="mb-2">
+                                <strong class="text-muted">Author:</strong>
+                            </p>
+                            <p class="fs-5">@Model.Author</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-2">
+                                <strong class="text-muted">Category:</strong>
+                            </p>
+                            <p>
+                                <span class="badge bg-info fs-6">@Model.Category</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <h5 class="fw-bold mb-3">Description</h5>
+                        <p class="text-justify lh-lg">@Model.Description</p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Key Details -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="detail-box bg-light p-3 rounded mb-3">
+                                <p class="text-muted mb-1">Price</p>
+                                <h4 class="text-success">₹@Model.Price.ToString("F2")</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-box bg-light p-3 rounded mb-3">
+                                <p class="text-muted mb-1">Rating</p>
+                                <h4>
+                                    <i class="bi bi-star-fill text-warning"></i> @Model.Rating.ToString("F1") / 5.0
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="detail-box bg-light p-3 rounded mb-3">
+                                <p class="text-muted mb-1">Publisher</p>
+                                <p class="fs-6">@(string.IsNullOrEmpty(Model.Publisher) ? "Not specified" : Model.Publisher)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-box bg-light p-3 rounded mb-3">
+                                <p class="text-muted mb-1">Published Year</p>
+                                <p class="fs-6">@(Model.PublishedYear.HasValue ? Model.PublishedYear.ToString() : "Not specified")</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> Back to Books
+                        </a>
+
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg">
+                                <i class="bi bi-pencil-square"></i> Edit Book
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">
+                                <i class="bi bi-trash"></i> Delete Book
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <div class="card bg-light shadow" style="border-radius: 10px; position: sticky; top: 20px;">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Quick Info</h5>
+
+                    <div class="mb-3">
+                        <p class="text-muted small mb-1">Book ID</p>
+                        <p class="fw-bold">@Model.Id</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="text-muted small mb-1">Price in Rupees</p>
+                        <p class="fw-bold text-success fs-6">₹@Model.Price.ToString("F2")</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="text-muted small mb-1">User Rating</p>
+                        <div class="star-rating mb-2">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (i < (int)Model.Rating)
+                                {
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                }
+                                else if (i < Model.Rating)
+                                {
+                                    <i class="bi bi-star-half text-warning"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-star text-muted"></i>
+                                }
+                            }
+                        </div>
+                        <p class="small text-muted">@Model.Rating / 5.0</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="alert alert-info small" role="alert">
+                        <i class="bi bi-info-circle"></i> Use the Edit button to update book details or Delete to remove this book from the store.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .detail-box {
+        border-left: 4px solid #0d6efd;
+    }
+
+    .star-rating {
+        font-size: 1.2rem;
+        letter-spacing: 0.25rem;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+    }
+
+    .text-justify {
+        text-align: justify;
+        line-height: 1.8;
+    }
+</style>

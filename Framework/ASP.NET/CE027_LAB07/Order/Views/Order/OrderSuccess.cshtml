@@ -1,0 +1,29 @@
+﻿@model Order.ViewModels.OrderViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+    var product = ViewBag.SelectedProduct as Order.Models.Product;
+}
+
+<div class="container mt-4">
+    <div class="alert alert-success">
+        <h3>Order Placed Successfully!</h3>
+    </div>
+
+    <table class="table table-bordered">
+        <tr><th>Customer Name</th><td>@Model.Customer.Name</td></tr>
+        <tr><th>Email</th><td>@Model.Customer.Email</td></tr>
+        <tr><th>Phone Number</th><td>@Model.Customer.PhoneNumber</td></tr>
+        <tr><th>Product</th><td>@product.Name</td></tr>
+        <tr><th>Unit Price</th><td>₹@product.Price</td></tr>
+        <tr><th>Quantity</th><td>@Model.Quantity</td></tr>
+        <tr><th>Total Price</th><td>₹@ViewBag.TotalPrice</td></tr>
+        <tr><th>Delivery Address</th><td>@Model.Delivery.Address</td></tr>
+        <tr><th>Delivery Date</th><td>@Model.Delivery.DeliveryDate.ToShortDateString()</td></tr>
+    </table>
+
+    <a asp-controller="Order" asp-action="Create" class="btn btn-secondary">Place Another Order</a>
+</div>

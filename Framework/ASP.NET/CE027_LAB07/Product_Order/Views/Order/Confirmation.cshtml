@@ -1,0 +1,220 @@
+@model Product_Order.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container">
+    <div class="confirmation-container">
+        <div class="confirmation-header">
+            <h1>✓ Order Confirmed</h1>
+            <p class="confirmation-message">Thank you for your order! Here are your order details.</p>
+        </div>
+
+        <div class="order-details">
+            <!-- Customer Information -->
+            <section class="detail-section">
+                <h2>Customer Information</h2>
+                <div class="detail-row">
+                    <span class="detail-label">Name:</span>
+                    <span class="detail-value">@Model.CustomerName</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">@Model.EmailAddress</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value">@Model.PhoneNumber</span>
+                </div>
+            </section>
+
+            <!-- Product Information -->
+            <section class="detail-section">
+                <h2>Product Information</h2>
+                <div class="detail-row">
+                    <span class="detail-label">Product:</span>
+                    <span class="detail-value">@Model.SelectedProductName</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Unit Price:</span>
+                    <span class="detail-value">${@Model.SelectedProductPrice.ToString("F2")}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Quantity:</span>
+                    <span class="detail-value">@Model.Quantity unit(s)</span>
+                </div>
+                <div class="detail-row total-price">
+                    <span class="detail-label">Total Price:</span>
+                    <span class="detail-value">${@Model.TotalPrice.ToString("F2")}</span>
+                </div>
+            </section>
+
+            <!-- Delivery Information -->
+            <section class="detail-section">
+                <h2>Delivery Address</h2>
+                <div class="detail-row">
+                    <span class="detail-label">Address:</span>
+                    <span class="detail-value">@Model.DeliveryAddress</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">City:</span>
+                    <span class="detail-value">@Model.City</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Postal Code:</span>
+                    <span class="detail-value">@Model.PostalCode</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Country:</span>
+                    <span class="detail-value">@Model.Country</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="confirmation-actions">
+            <form method="post" action="@Url.Action("Complete", "Order")" style="flex: 1;">
+                <button type="submit" class="btn-confirm-order">Confirm & Complete Order</button>
+            </form>
+            <a href="@Url.Action("Index", "Order")" class="btn-continue-shopping">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .confirmation-container {
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .confirmation-header {
+        text-align: center;
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #28a745;
+    }
+
+    .confirmation-header h1 {
+        color: #28a745;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .confirmation-message {
+        color: #666;
+        font-size: 16px;
+    }
+
+    .order-details {
+        margin-bottom: 30px;
+    }
+
+    .detail-section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border-left: 4px solid #007bff;
+    }
+
+    .detail-section h2 {
+        color: #333;
+        font-size: 18px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-row.total-price {
+        background-color: #f0f0f0;
+        padding: 12px;
+        margin: 10px -20px -20px -20px;
+        border-radius: 0 0 6px 6px;
+        font-weight: bold;
+    }
+
+    .detail-label {
+        font-weight: bold;
+        color: #333;
+        min-width: 120px;
+    }
+
+    .detail-value {
+        color: #666;
+        text-align: right;
+        flex: 1;
+        word-break: break-word;
+    }
+
+    .detail-row.total-price .detail-label {
+        color: #333;
+    }
+
+    .detail-row.total-price .detail-value {
+        color: #28a745;
+        font-size: 16px;
+    }
+
+    .confirmation-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .confirmation-actions form {
+        flex: 1;
+        margin: 0;
+    }
+
+    .btn-confirm-order,
+    .btn-continue-shopping {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+    .btn-confirm-order {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-confirm-order:hover {
+        background-color: #218838;
+    }
+
+    .btn-continue-shopping {
+        background-color: #6c757d;
+        color: white;
+        flex: 1;
+    }
+
+    .btn-continue-shopping:hover {
+        background-color: #5a6268;
+        text-decoration: none;
+        color: white;
+    }
+</style>
