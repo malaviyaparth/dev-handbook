@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Book/Book.csproj" />
+  <Project Path="Book_Management/Book_Management.csproj" Id="ccebf5d9-4103-4c81-9d09-95e26ecf0551" />
+</Solution>
